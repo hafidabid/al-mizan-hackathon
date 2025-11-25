@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: ponderpassword12xY12
       POSTGRES_DB: ponder
     ports:
-      - "5433:5432"
+      - "5432:5432"
     volumes:
       - indexer_pgdata:/var/lib/postgresql/data
     mem_limit: 256m

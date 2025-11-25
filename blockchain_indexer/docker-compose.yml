@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: ponderpassword12xY12
       POSTGRES_DB: ponder
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - indexer_pgdata:/var/lib/postgresql/data
     mem_limit: 256m
@@ -23,7 +23,7 @@ services:
       - indexer-db
     environment:
       # Ponder database connection (PostgreSQL)
-      DATABASE_URL: postgresql://ponder:ponderpassword@indexer-db:5432/ponder
+      DATABASE_URL: postgresql://ponder:ponderpassword@indexer-db:5433/ponder
       DATABSE_SCHEMA: public
 
       # Chain RPC URLs (set these in your deployment env)

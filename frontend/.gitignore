@@ -1,0 +1,5 @@
+training
+node_modules
+dist
+
+.env

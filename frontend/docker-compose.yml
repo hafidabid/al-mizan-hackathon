@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  # Development service
+  evera-frontend-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: evera-frontend-dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    profiles:
+      - dev
+
+  # Production service - CORRECTED
+  evera-frontend-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: evera-frontend-prod
+    ports:
+      # Correct mapping: Host port 8080 -> Container port 80
+      - "8080:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    profiles:
+      - prod
+
+# Networks (optional)
+networks:
+  default:
+    name: evera-network

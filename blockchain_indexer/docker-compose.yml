@@ -6,12 +6,13 @@ services:
     container_name: almizan-indexer-db
     environment:
       POSTGRES_USER: ponder
-      POSTGRES_PASSWORD: ponderpassword
+      POSTGRES_PASSWORD: ponderpassword12xY12
       POSTGRES_DB: ponder
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - indexer_pgdata:/var/lib/postgresql/data
+    mem_limit: 256m
 
   indexer-app:
     build:
@@ -32,6 +33,7 @@ services:
     ports:
       - "42069:42069"
     restart: unless-stopped
+    mem_limit: 350m
 
 volumes:
   indexer_pgdata:

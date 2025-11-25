@@ -7,7 +7,7 @@
     "dev": "ponder dev",
     "start": "ponder start",
     "db": "ponder db",
-    "start:schema": "ponder start --schema public",
+    "start-schema": "ponder start --schema public",
     "codegen": "ponder codegen",
     "lint": "eslint .",
     "typecheck": "tsc"

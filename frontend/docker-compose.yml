@@ -25,7 +25,7 @@ services:
     container_name: almizan-fe-prod
     ports:
       # Correct mapping: Host port 8080 -> Container port 80
-      - "8080:80"
+      - "8085:80"
     restart: unless-stopped
     environment:
       - NODE_ENV=production

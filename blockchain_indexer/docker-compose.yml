@@ -23,7 +23,7 @@ services:
       - indexer-db
     environment:
       # Ponder database connection (PostgreSQL)
-      DATABASE_URL: postgresql://ponder:ponderpassword@indexer-db:5433/ponder
+      DATABASE_URL: postgresql://ponder:ponderpassword12xY12@indexer-db:5432/ponder
       DATABSE_SCHEMA: public
 
       # Chain RPC URLs (set these in your deployment env)

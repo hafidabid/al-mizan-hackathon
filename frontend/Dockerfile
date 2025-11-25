@@ -54,7 +54,7 @@ WORKDIR /home/node/app
 COPY --chown=node:node package*.json ./
 
 # Install all dependencies
-RUN npm ci
+RUN npm install
 
 # Copy source code (will be overwritten by volume mount in compose)
 COPY --chown=node:node . .

@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  indexer-db:
+    image: postgres:16-alpine
+    container_name: almizan-indexer-db
+    environment:
+      POSTGRES_USER: ponder
+      POSTGRES_PASSWORD: ponderpassword
+      POSTGRES_DB: ponder
+    ports:
+      - "5432:5432"
+    volumes:
+      - indexer_pgdata:/var/lib/postgresql/data
+
+  indexer-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: almizan-indexer-app
+    depends_on:
+      - indexer-db
+    environment:
+      # Ponder database connection (PostgreSQL)
+      DATABASE_URL: postgresql://ponder:ponderpassword@indexer-db:5432/ponder
+
+      # Chain RPC URLs (set these in your deployment env)
+      PONDER_RPC_URL_1: ${PONDER_RPC_URL_1}
+      PONDER_RPC_URL_42: ${PONDER_RPC_URL_42}
+
+      NODE_ENV: production
+    ports:
+      - "42069:42069"
+    restart: unless-stopped
+
+volumes:
+  indexer_pgdata:

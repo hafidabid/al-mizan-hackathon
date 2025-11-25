@@ -1,13 +1,13 @@
-version: "3.8"
+version: "3.9"
 
 services:
   # Development service
-  evera-frontend-dev:
+  almizan-fe-dev:
     build:
       context: .
       dockerfile: Dockerfile
       target: development
-    container_name: evera-frontend-dev
+    container_name: almizan-fe-dev
     ports:
       - "5173:5173"
     volumes:
@@ -19,12 +19,12 @@ services:
       - dev
 
   # Production service - CORRECTED
-  evera-frontend-prod:
+  almizan-fe-prod:
     build:
       context: .
       dockerfile: Dockerfile
       target: production
-    container_name: evera-frontend-prod
+    container_name: almizan-fe-prod
     ports:
       # Correct mapping: Host port 8080 -> Container port 80
       - "8080:80"
@@ -37,4 +37,4 @@ services:
 # Networks (optional)
 networks:
   default:
-    name: evera-network
+    name: almizan-fe-network

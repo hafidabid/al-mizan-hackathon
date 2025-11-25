@@ -12,7 +12,7 @@ WORKDIR /home/node/app
 COPY --chown=node:node package*.json ./
 
 # Install all dependencies needed for the build
-RUN npm ci
+RUN npm install
 
 # Copy the rest of the source code
 COPY --chown=node:node . .

@@ -12,6 +12,6 @@ ENV NODE_ENV=production
 
 EXPOSE 42069
 
-CMD ["npm", "start", "--schema", "public"]
+CMD ["npm", "start:schema"]
 
 

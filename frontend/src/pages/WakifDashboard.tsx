@@ -9,6 +9,7 @@ import TransactionMonitoring, {
   type TokenTransfer,
 } from "../components/dashboard/wakif/TransactionMonitoring";
 import ValueCreationMetrics from "../components/dashboard/wakif/ValueCreationMetrics";
+import type { SelectedProject } from "../types/dashboard";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "https://almizan-be.jawara.academy";
@@ -20,6 +21,12 @@ const WAKAF_CONTRACT_ADDRESS = import.meta.env
 const WakifDashboard = () => {
   const [moneyOutEvents, setMoneyOutEvents] = useState<MoneyOutEvent[]>([]);
   const [tokenTransfers, setTokenTransfers] = useState<TokenTransfer[]>([]);
+  const [selectedProjects, setSelectedProjects] = useState<SelectedProject[]>(
+    []
+  );
+  const [currentProject, setCurrentProject] = useState<SelectedProject | null>(
+    null
+  );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -98,10 +105,28 @@ const WakifDashboard = () => {
     }
   };
 
+  const fetchProjects = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/selected-projects`);
+      if (response.data) {
+        setSelectedProjects(response.data);
+        if (response.data.length > 0) {
+          setCurrentProject(response.data[0]);
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching selected projects:", error);
+    }
+  };
+
   useEffect(() => {
     fetchBlockchainData();
+    fetchProjects();
     // Refresh every 30 seconds
-    const interval = setInterval(fetchBlockchainData, 30000);
+    const interval = setInterval(() => {
+      fetchBlockchainData();
+      fetchProjects();
+    }, 30000);
     return () => clearInterval(interval);
   }, []);
 
@@ -160,7 +185,11 @@ const WakifDashboard = () => {
 
       <PortfolioOverview />
       <LiveImpactTracking />
-      <SatelliteVerificationSection />
+      <SatelliteVerificationSection
+        currentProject={currentProject}
+        allProjects={selectedProjects}
+        onSelectProject={setCurrentProject}
+      />
       <TransactionMonitoring
         moneyOutEvents={moneyOutEvents}
         tokenTransfers={tokenTransfers}

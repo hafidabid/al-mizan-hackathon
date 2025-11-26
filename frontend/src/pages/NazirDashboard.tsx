@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
   useAccount,
   useReadContract,
@@ -9,11 +9,12 @@ import { formatUnits, parseUnits } from "viem";
 import { wakafcontract } from "../abi/wakaf";
 import { mockStableCoin } from "../abi/mockStableCoin";
 import {
-  projectsData,
   MAQASID,
   AVAILABLE_SDGS,
   SDG_DETAILS,
+  type Project,
 } from "../data/mockData";
+import { fetchProjects } from "../utils/api";
 import { MaqasidIcon, SdgBadge } from "../components/ui/Badges";
 import { Search, MapPin, CheckCircle, Filter, Globe } from "lucide-react";
 import { rupiahFormatter } from "../utils/rupiahFormatter";
@@ -45,7 +46,16 @@ const NazirDashboard = () => {
   const [selectedSdgs, setSelectedSdgs] = useState<number[]>(AVAILABLE_SDGS);
   const [searchQuery, setSearchQuery] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  const [selectedProject, setSelectedProject] = useState<string | null>(null);
+  const [projectsData, setProjectsData] = useState<Project[]>([]);
+
+  useEffect(() => {
+    const loadProjects = async () => {
+      const data = await fetchProjects();
+      setProjectsData(data);
+    };
+    loadProjects();
+  }, []);
 
   const toggleMaqasid = (id: string) => {
     setSelectedMaqasid((prev) =>
@@ -64,7 +74,9 @@ const NazirDashboard = () => {
       const hasMaqasid = project.maqasid.some((m) =>
         selectedMaqasid.includes(m)
       );
-      const hasSdg = project.sdgs.some((s) => selectedSdgs.includes(s));
+      const hasSdg = project.sdgs.some((s) =>
+        selectedSdgs.map((s) => s.toString()).includes(s.toString())
+      );
       const matchesSearch =
         project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         project.location.address
@@ -95,7 +107,7 @@ const NazirDashboard = () => {
     hash,
   });
 
-  const handleOpenModal = (projectId: number) => {
+  const handleOpenModal = (projectId: string) => {
     setSelectedProject(projectId);
     setModalOpen(true);
   };

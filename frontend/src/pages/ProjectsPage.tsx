@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import {
   Search,
   MapPin,
@@ -8,14 +8,25 @@ import {
   Globe,
 } from "lucide-react";
 import {
-  projectsData,
   MAQASID,
   AVAILABLE_SDGS,
   SDG_DETAILS,
+  type Project,
 } from "../data/mockData";
+import { fetchProjects } from "../utils/api";
 import { MaqasidIcon, SdgBadge } from "../components/ui/Badges";
 
 const ProjectsPage = () => {
+  const [projectsData, setProjectsData] = useState<Project[]>([]);
+
+  useEffect(() => {
+    const loadProjects = async () => {
+      const data = await fetchProjects();
+      setProjectsData(data);
+    };
+    loadProjects();
+  }, []);
+
   const [selectedMaqasid, setSelectedMaqasid] = useState<string[]>(
     Object.keys(MAQASID)
   );

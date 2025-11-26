@@ -85,7 +85,7 @@ export interface Location {
 }
 
 export interface Project {
-  id: number;
+  id: string; // Changed to string to match PocketBase ID
   title: string;
   location: Location;
   sdgs: number[];
@@ -110,100 +110,8 @@ export interface Project {
   };
 }
 
-// Project List Data
-export const projectsData: Project[] = [
-  {
-    id: 1,
-    title: "Lombok Solar Microgrid Zone A",
-    location: {
-      address: "Sembalun, East Lombok",
-      latitude: -8.3587,
-      longitude: 116.5342,
-    },
-    sdgs: [7, 9, 13],
-    maqasid: ["NAFS", "MAL", "BIAH"],
-    type: "Renewable Energy",
-    verified: true,
-    quickMetrics: {
-      needed: 2250000000,
-      allocation: "60% Waqf / 40% Zakat",
-      beneficiaries: 2500,
-      timeline: "12 Months",
-    },
-    image:
-      "https://energy-oil-gas.com/wp-content/uploads/sites/3/2023/05/Solar-panels.jpg",
-    metrics: {
-      // Base metrics per 10,000,000 IDR investment
-      co2Yearly: 0.15, // tons
-      energyMWh: 0.2,
-      trees: 5,
-      jobs: { construction: 0.05, ops: 0.01 },
-      sroi: 3.2,
-      irr: 12.5,
-      multiplier: 4.0,
-    },
-  },
-  {
-    id: 2,
-    title: "Aceh Digital Education Hub",
-    location: {
-      address: "Aceh Besar, Sumatra",
-      latitude: 5.4219,
-      longitude: 95.4343,
-    },
-    sdgs: [4, 9],
-    maqasid: ["AQL", "NASL"],
-    type: "Education Tech",
-    verified: true,
-    quickMetrics: {
-      needed: 1125000000,
-      allocation: "100% Waqf",
-      beneficiaries: 1200,
-      timeline: "6 Months",
-    },
-    image:
-      "https://energy-oil-gas.com/wp-content/uploads/sites/3/2023/05/Solar-panels.jpg",
-    metrics: {
-      co2Yearly: 0.02,
-      energyMWh: 0,
-      trees: 1,
-      jobs: { construction: 0.02, ops: 0.05 },
-      sroi: 4.5,
-      irr: 8.5,
-      multiplier: 3.5,
-    },
-  },
-  {
-    id: 3,
-    title: "Cianjur Smart Paddy Waqf",
-    location: {
-      address: "Cianjur, West Java",
-      latitude: -6.8217,
-      longitude: 107.1416,
-    },
-    sdgs: [1, 2],
-    maqasid: ["NAFS", "MAL", "BIAH"],
-    type: "Agriculture",
-    verified: true,
-    quickMetrics: {
-      needed: 3000000000,
-      allocation: "30% Waqf / 70% Zakat",
-      beneficiaries: 5000,
-      timeline: "Seasonal (4 Months)",
-    },
-    image:
-      "https://energy-oil-gas.com/wp-content/uploads/sites/3/2023/05/Solar-panels.jpg",
-    metrics: {
-      co2Yearly: 0.08,
-      energyMWh: 0,
-      trees: 20,
-      jobs: { construction: 0.1, ops: 0.2 },
-      sroi: 5.0,
-      irr: 11.0,
-      multiplier: 5.2,
-    },
-  },
-];
+export const projectsData: Project[] = []; // Replaced by API call
+// Old mock data removed for clarity, interfaces kept for type safety
 
 // View 2: Live Tracking Data
 export const liveImpactData = [

@@ -6,8 +6,11 @@ import cv2
 import numpy as np
 from typing import List, Dict, Tuple, Optional
 
+import os
+
 # GANTI PATH INI SESUAI LETAK best.pt DI SERVER / LOCAL
-MODEL_PATH = r"./best.pt"
+# Use absolute path relative to this file to avoid CWD issues
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "best.pt")
 # Kalau nanti di server Linux: "/home/user/models/best.pt"
 
 # Load model sekali di awal (biar cepet pas dipanggil berkali-kali)

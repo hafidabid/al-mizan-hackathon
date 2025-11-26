@@ -29,6 +29,7 @@ interface TransactionMonitoringProps {
   loading: boolean;
   error: string | null;
   onRefresh: () => void;
+  tokenContractAddress?: string;
 }
 
 const TransactionMonitoring: React.FC<TransactionMonitoringProps> = ({
@@ -37,6 +38,7 @@ const TransactionMonitoring: React.FC<TransactionMonitoringProps> = ({
   loading,
   error,
   onRefresh,
+  tokenContractAddress,
 }) => {
   const formatTimestamp = (timestamp: string) => {
     const date = new Date(Number(timestamp) * 1000);
@@ -81,10 +83,18 @@ const TransactionMonitoring: React.FC<TransactionMonitoringProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-gray-100">
         {/* Money Out Events */}
         <div className="p-6">
-          <h4 className="text-sm font-bold text-gray-700 mb-4 flex items-center">
-            <DollarSign size={16} className="mr-2 text-green-600" />
-            Fund Distributions ({moneyOutEvents.length})
-          </h4>
+          <div className="flex justify-between items-start mb-4">
+            <h4 className="text-sm font-bold text-gray-700 flex items-center">
+              <DollarSign size={16} className="mr-2 text-green-600" />
+              Fund Distributions ({moneyOutEvents.length})
+            </h4>
+            {tokenContractAddress && (
+              <span className="text-[10px] bg-gray-100 px-2 py-1 rounded text-gray-500 font-mono">
+                Token: {tokenContractAddress.slice(0, 6)}...
+                {tokenContractAddress.slice(-4)}
+              </span>
+            )}
+          </div>
           {loading && moneyOutEvents.length === 0 ? (
             <div className="text-center py-8 text-gray-500">
               Loading transactions...

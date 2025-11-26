@@ -26,10 +26,10 @@ export const MaqasidIcon = ({ type }: { type: string }) => {
   );
 };
 
-export const SdgBadge = ({ number }: { number: number }) => {
-  const colors: Record<number, string> = {
-    1: 'bg-red-500', 2: 'bg-yellow-500', 4: 'bg-red-700',
-    7: 'bg-yellow-400', 9: 'bg-orange-500', 13: 'bg-green-700'
+export const SdgBadge = ({ number }: { number: string }) => {
+  const colors: Record<string, string> = {
+    "1": 'bg-red-500', "2": 'bg-yellow-500', "4": 'bg-red-700',
+    "7": 'bg-yellow-400', "9": 'bg-orange-500', "13": 'bg-green-700'
   };
   return (
     <div className={`${colors[number] || 'bg-gray-500'} w-6 h-6 rounded flex items-center justify-center mr-1 shadow-sm text-white text-[10px] font-bold`} title={`SDG ${number}`}>

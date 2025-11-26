@@ -120,7 +120,7 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center">
           <div className="max-w-3xl md:w-1/2">
             <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
-              Rooted by Islamic Value <br />
+              Rooted by Islamic Finance Value <br />
               <span className="text-green-300">Powered by AI & Blockchain</span>
             </h1>
             <p className="text-xl md:text-2xl text-green-50 mb-10 font-light">

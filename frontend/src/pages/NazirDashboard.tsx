@@ -43,7 +43,7 @@ const NazirDashboard = () => {
   const [selectedMaqasid, setSelectedMaqasid] = useState<string[]>(
     Object.keys(MAQASID)
   );
-  const [selectedSdgs, setSelectedSdgs] = useState<number[]>(AVAILABLE_SDGS);
+  const [selectedSdgs, setSelectedSdgs] = useState<string[]>(AVAILABLE_SDGS);
   const [searchQuery, setSearchQuery] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
@@ -63,7 +63,7 @@ const NazirDashboard = () => {
     );
   };
 
-  const toggleSdg = (num: number) => {
+  const toggleSdg = (num: string) => {
     setSelectedSdgs((prev) =>
       prev.includes(num) ? prev.filter((p) => p !== num) : [...prev, num]
     );
@@ -74,9 +74,7 @@ const NazirDashboard = () => {
       const hasMaqasid = project.maqasid.some((m) =>
         selectedMaqasid.includes(m)
       );
-      const hasSdg = project.sdgs.some((s) =>
-        selectedSdgs.map((s) => s.toString()).includes(s.toString())
-      );
+      const hasSdg = project.sdgs.some((s) => selectedSdgs.includes(s));
       const matchesSearch =
         project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         project.location.address

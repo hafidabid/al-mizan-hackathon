@@ -30,16 +30,18 @@ const ProjectsPage = () => {
   const [selectedMaqasid, setSelectedMaqasid] = useState<string[]>(
     Object.keys(MAQASID)
   );
-  const [selectedSdgs, setSelectedSdgs] = useState<number[]>(AVAILABLE_SDGS);
+  const [selectedSdgs, setSelectedSdgs] = useState<string[]>(AVAILABLE_SDGS);
   const [searchQuery, setSearchQuery] = useState("");
 
   const toggleMaqasid = (id: string) => {
     setSelectedMaqasid((prev) =>
-      prev.includes(id) ? prev.filter((p) => p !== id) : [...prev, id]
+      prev.includes(id)
+        ? prev.map((d) => d.toString()).filter((p) => p !== id)
+        : [...prev, id]
     );
   };
 
-  const toggleSdg = (num: number) => {
+  const toggleSdg = (num: string) => {
     setSelectedSdgs((prev) =>
       prev.includes(num) ? prev.filter((p) => p !== num) : [...prev, num]
     );
@@ -50,6 +52,7 @@ const ProjectsPage = () => {
       const hasMaqasid = project.maqasid.some((m) =>
         selectedMaqasid.includes(m)
       );
+
       const hasSdg = project.sdgs.some((s) => selectedSdgs.includes(s));
       const matchesSearch =
         project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -58,7 +61,7 @@ const ProjectsPage = () => {
           .includes(searchQuery.toLowerCase());
       return hasMaqasid && hasSdg && matchesSearch;
     });
-  }, [selectedMaqasid, selectedSdgs, searchQuery]);
+  }, [projectsData, selectedMaqasid, selectedSdgs, searchQuery]);
 
   return (
     <div className="bg-gray-50 min-h-screen py-10">
@@ -159,7 +162,15 @@ const ProjectsPage = () => {
                   }}
                   className="mt-2 text-green-600 text-sm hover:underline"
                 >
-                  Reset All Filters
+                  filter
+                </button>
+                <button
+                  onClick={() => {
+                    // reset memory state
+                  }}
+                  className="mt-2 text-green-600 text-sm hover:underline"
+                >
+                  Refresh
                 </button>
               </div>
             ) : (

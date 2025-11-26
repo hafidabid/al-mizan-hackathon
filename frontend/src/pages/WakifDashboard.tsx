@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Download } from "lucide-react";
+import { Download, ExternalLink, Copy } from "lucide-react";
 import axios from "axios";
 import PortfolioOverview from "../components/dashboard/wakif/PortfolioOverview";
 import LiveImpactTracking from "../components/dashboard/wakif/LiveImpactTracking";
@@ -115,7 +115,47 @@ const WakifDashboard = () => {
             Impact Measurement, Reporting, and Verification (MRV) Monitor
           </p>
         </div>
-        <div className="flex items-center space-x-4"></div>
+        <div className="flex items-center space-x-4">
+          <div className="bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200 flex items-center space-x-4">
+            <div className="flex flex-col items-end">
+              <span className="text-xs text-gray-500 font-bold uppercase tracking-wider">
+                Wakaf Contract
+              </span>
+              <a
+                href={`https://sepolia-blockscout.lisk.com/address/${WAKAF_CONTRACT_ADDRESS}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-mono font-medium text-green-600 hover:text-green-700 flex items-center group"
+              >
+                {WAKAF_CONTRACT_ADDRESS.slice(0, 6)}...
+                {WAKAF_CONTRACT_ADDRESS.slice(-4)}
+                <ExternalLink
+                  size={12}
+                  className="ml-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                />
+              </a>
+            </div>
+            <div className="h-8 w-px bg-gray-200"></div>
+            <div className="flex flex-col items-end">
+              <span className="text-xs text-gray-500 font-bold uppercase tracking-wider">
+                Token Contract (IDR)
+              </span>
+              <a
+                href={`https://sepolia-blockscout.lisk.com/address/${IDR_CONTRACT_ADDRESS}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-mono font-medium text-green-600 hover:text-green-700 flex items-center group"
+              >
+                {IDR_CONTRACT_ADDRESS.slice(0, 6)}...
+                {IDR_CONTRACT_ADDRESS.slice(-4)}
+                <ExternalLink
+                  size={12}
+                  className="ml-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
 
       <PortfolioOverview />
@@ -127,6 +167,7 @@ const WakifDashboard = () => {
         loading={loading}
         error={error}
         onRefresh={fetchBlockchainData}
+        tokenContractAddress={IDR_CONTRACT_ADDRESS}
       />
       <ValueCreationMetrics />
     </div>

@@ -48,35 +48,35 @@ export const MAQASID: Record<string, MaqasidInfo> = {
 };
 
 // SDG Educational Dictionary
-export const SDG_DETAILS: Record<number, { title: string; desc: string }> = {
-  1: {
+export const SDG_DETAILS: Record<string, { title: string; desc: string }> = {
+  "1": {
     title: "Tanpa Kemiskinan",
     desc: "Mengakhiri kemiskinan dalam segala bentuk dimanapun.",
   },
-  2: {
+  "2": {
     title: "Tanpa Kelaparan",
     desc: "Menghilangkan kelaparan, mencapai ketahanan pangan dan gizi yang baik.",
   },
-  4: {
+  "4": {
     title: "Pendidikan Berkualitas",
     desc: "Menjamin kualitas pendidikan yang inklusif dan merata serta kesempatan belajar.",
   },
-  7: {
+  "7": {
     title: "Energi Bersih",
     desc: "Menjamin akses energi yang terjangkau, andal, berkelanjutan, dan modern.",
   },
-  9: {
+  "9": {
     title: "Industri & Inovasi",
     desc: "Membangun infrastruktur tangguh dan mempromosikan industrialisasi berkelanjutan.",
   },
-  13: {
+  "13": {
     title: "Penanganan Perubahan Iklim",
     desc: "Mengambil tindakan cepat untuk memerangi perubahan iklim dan dampaknya.",
   },
 };
 
 // Available SDGs for Filter
-export const AVAILABLE_SDGS = [1, 2, 4, 7, 9, 13];
+export const AVAILABLE_SDGS = ["1", "2", "4", "7", "9", "13"];
 
 export interface Location {
   address: string;
@@ -88,7 +88,7 @@ export interface Project {
   id: string; // Changed to string to match PocketBase ID
   title: string;
   location: Location;
-  sdgs: number[];
+  sdgs: string[];
   maqasid: string[];
   type: string;
   verified: boolean;

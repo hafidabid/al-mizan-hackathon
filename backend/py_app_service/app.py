@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from py_app_service.routers import projects, indexer, users
+from py_app_service.routers import projects, indexer, users, selected_projects
 
 app = FastAPI()
 
@@ -18,5 +18,6 @@ async def root():
     return {"message": "Hello World"}
 
 app.include_router(projects.router)
+app.include_router(selected_projects.router)
 app.include_router(indexer.router)
 app.include_router(users.router)

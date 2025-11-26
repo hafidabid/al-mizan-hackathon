@@ -1,5 +1,6 @@
 POCKETBASE_BASE_URL = "https://hackathon22.pocketbase.bocindonesia.com"
 POCKETBASE_USERS_COLLECTION = "users"
 POCKETBASE_PROJECTS_COLLECTION = "projects"
+POCKETBASE_SELECTED_PROJECTS_COLLECTION = "selected_project"
 INDEXER_BASE_URL = "http://157.15.4.171:42069/"
 

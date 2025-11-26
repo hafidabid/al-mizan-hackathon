@@ -31,11 +31,6 @@ const SatelliteVerificationSection = () => {
   const map = useRef<mapboxgl.Map | null>(null);
 
   const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN || "";
-  const PROJECT_COORDINATES = {
-    latitude: -8.3405,
-    longitude: 116.0439,
-    zoom: 15,
-  };
 
   const detectionBoxes = [
     { id: 1, x: 20, y: 35, w: 12, h: 18, label: "PV Array 1" },
@@ -67,15 +62,12 @@ const SatelliteVerificationSection = () => {
         map.current = new mapboxgl.Map({
           container: mapContainer.current,
           style: "mapbox://styles/mapbox/satellite-streets-v12",
-          center: [PROJECT_COORDINATES.longitude, PROJECT_COORDINATES.latitude],
-          zoom: PROJECT_COORDINATES.zoom,
+          center: [116.0439, -8.3405],
+          zoom: 15,
         });
 
         new mapboxgl.Marker({ color: "#22c55e" })
-          .setLngLat([
-            PROJECT_COORDINATES.longitude,
-            PROJECT_COORDINATES.latitude,
-          ])
+          .setLngLat([116.0439, -8.3405])
           .addTo(map.current);
 
         map.current.addControl(
@@ -228,9 +220,9 @@ const SatelliteVerificationSection = () => {
                         <div className="font-bold">
                           Computer Vision Analysis
                         </div>
-                        <div className="text-[10px] opacity-80">
+                        {/* <div className="text-[10px] opacity-80">
                           Confidence Score: 98.5%
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </>

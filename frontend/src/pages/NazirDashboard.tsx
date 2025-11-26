@@ -67,7 +67,9 @@ const NazirDashboard = () => {
       const hasSdg = project.sdgs.some((s) => selectedSdgs.includes(s));
       const matchesSearch =
         project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        project.location.toLowerCase().includes(searchQuery.toLowerCase());
+        project.location.address
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase());
       return hasMaqasid && hasSdg && matchesSearch;
     });
   }, [selectedMaqasid, selectedSdgs, searchQuery]);
@@ -268,23 +270,32 @@ const NazirDashboard = () => {
                     className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all group"
                   >
                     <div className="flex flex-col md:flex-row">
-                      {/* Left: Project Info */}
+                      {/* Left: Project Image & Info */}
                       <div className="p-6 md:w-5/12 flex flex-col justify-between border-b md:border-b-0 md:border-r border-gray-100">
                         <div>
-                          <div className="flex justify-between items-start mb-2">
+                          <div className="relative mb-4 rounded-xl overflow-hidden h-48 w-full">
+                            <img
+                              src={
+                                project.image ||
+                                "https://energy-oil-gas.com/wp-content/uploads/sites/3/2023/05/Solar-panels.jpg"
+                              }
+                              alt={project.title}
+                              className="w-full h-full object-cover"
+                            />
                             {project.verified && (
-                              <div className="flex items-center space-x-2 text-green-600 bg-green-50 px-2 py-1 rounded-full text-xs font-bold w-fit mb-2">
+                              <div className="absolute top-3 left-3 flex items-center space-x-2 text-white bg-green-600 bg-opacity-90 px-3 py-1.5 rounded-full text-xs font-bold shadow-md backdrop-blur-sm">
                                 <CheckCircle size={14} />
                                 <span>Verified</span>
                               </div>
                             )}
                           </div>
+
                           <h2 className="text-xl font-bold text-gray-900 mb-2">
                             {project.title}
                           </h2>
                           <div className="flex items-center text-gray-500 text-sm mb-4">
                             <MapPin size={14} className="mr-1" />{" "}
-                            {project.location}
+                            {project.location.address}
                           </div>
                           <div className="flex flex-wrap gap-2 mb-4">
                             {project.maqasid.map((m) => (
@@ -300,14 +311,14 @@ const NazirDashboard = () => {
                       </div>
 
                       {/* Middle: Metrics */}
-                      <div className="p-6 md:w-4/12 bg-gray-50 flex flex-col justify-center space-y-4">
-                        <div className="grid grid-cols-2 gap-4">
-                          <div>
+                      <div className="flex p-6 md:w-4/12 bg-gray-50 flex flex-col justify-center space-y-4 text-center">
+                        <div className="flex flex-col items-center justify-center gap-4">
+                          <div className="flex flex-col items-center justify-center text-wrap">
                             <div className="text-xs text-gray-500 mb-1">
                               Target
                             </div>
                             <div className="font-bold text-gray-900 text-lg">
-                              $ {project.quickMetrics.needed.toLocaleString()}
+                              {rupiahFormatter(project.quickMetrics.needed)}
                             </div>
                           </div>
                           <div>
@@ -319,15 +330,15 @@ const NazirDashboard = () => {
                               ppl
                             </div>
                           </div>
-                          <div className="col-span-2">
-                            <div className="w-full bg-gray-200 rounded-full h-2.5 mb-1">
+                          <div className="col-span-2 ">
+                            <div className="flex w-full bg-gray-200 rounded-full h-2.5 mb-1">
                               <div
                                 className="bg-green-600 h-2.5 rounded-full"
                                 style={{ width: "45%" }}
                               ></div>
                             </div>
-                            <div className="flex justify-between text-xs text-gray-500">
-                              <span>$ 67,500 raised</span>
+                            <div className="flex justify-between text-xs text-gray-500 text-wrap">
+                              <span>{rupiahFormatter(1012500000)} raised</span>
                               <span>45%</span>
                             </div>
                           </div>
@@ -341,7 +352,7 @@ const NazirDashboard = () => {
                           disabled={!isConnected}
                           className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center"
                         >
-                          Transfer Funds
+                          Calculate Impact
                         </button>
                       </div>
                     </div>

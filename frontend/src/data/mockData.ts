@@ -78,14 +78,21 @@ export const SDG_DETAILS: Record<number, { title: string; desc: string }> = {
 // Available SDGs for Filter
 export const AVAILABLE_SDGS = [1, 2, 4, 7, 9, 13];
 
+export interface Location {
+  address: string;
+  latitude: number;
+  longitude: number;
+}
+
 export interface Project {
   id: number;
   title: string;
-  location: string;
+  location: Location;
   sdgs: number[];
   maqasid: string[];
   type: string;
   verified: boolean;
+  image?: string;
   quickMetrics: {
     needed: number;
     allocation: string;
@@ -108,19 +115,25 @@ export const projectsData: Project[] = [
   {
     id: 1,
     title: "Lombok Solar Microgrid Zone A",
-    location: "Sembalun, East Lombok",
+    location: {
+      address: "Sembalun, East Lombok",
+      latitude: -8.3587,
+      longitude: 116.5342,
+    },
     sdgs: [7, 9, 13],
     maqasid: ["NAFS", "MAL", "BIAH"],
     type: "Renewable Energy",
     verified: true,
     quickMetrics: {
-      needed: 150000,
+      needed: 2250000000,
       allocation: "60% Waqf / 40% Zakat",
       beneficiaries: 2500,
       timeline: "12 Months",
     },
+    image:
+      "https://energy-oil-gas.com/wp-content/uploads/sites/3/2023/05/Solar-panels.jpg",
     metrics: {
-      // Base metrics per $1000 investment
+      // Base metrics per 10,000,000 IDR investment
       co2Yearly: 0.15, // tons
       energyMWh: 0.2,
       trees: 5,
@@ -133,17 +146,23 @@ export const projectsData: Project[] = [
   {
     id: 2,
     title: "Aceh Digital Education Hub",
-    location: "Aceh Besar, Sumatra",
+    location: {
+      address: "Aceh Besar, Sumatra",
+      latitude: 5.4219,
+      longitude: 95.4343,
+    },
     sdgs: [4, 9],
     maqasid: ["AQL", "NASL"],
     type: "Education Tech",
     verified: true,
     quickMetrics: {
-      needed: 75000,
+      needed: 1125000000,
       allocation: "100% Waqf",
       beneficiaries: 1200,
       timeline: "6 Months",
     },
+    image:
+      "https://energy-oil-gas.com/wp-content/uploads/sites/3/2023/05/Solar-panels.jpg",
     metrics: {
       co2Yearly: 0.02,
       energyMWh: 0,
@@ -157,17 +176,23 @@ export const projectsData: Project[] = [
   {
     id: 3,
     title: "Cianjur Smart Paddy Waqf",
-    location: "Cianjur, West Java",
+    location: {
+      address: "Cianjur, West Java",
+      latitude: -6.8217,
+      longitude: 107.1416,
+    },
     sdgs: [1, 2],
     maqasid: ["NAFS", "MAL", "BIAH"],
     type: "Agriculture",
     verified: true,
     quickMetrics: {
-      needed: 200000,
+      needed: 3000000000,
       allocation: "30% Waqf / 70% Zakat",
       beneficiaries: 5000,
       timeline: "Seasonal (4 Months)",
     },
+    image:
+      "https://energy-oil-gas.com/wp-content/uploads/sites/3/2023/05/Solar-panels.jpg",
     metrics: {
       co2Yearly: 0.08,
       energyMWh: 0,

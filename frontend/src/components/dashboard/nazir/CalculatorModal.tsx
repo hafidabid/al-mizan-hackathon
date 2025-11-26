@@ -14,6 +14,7 @@ import {
   Lock,
 } from "lucide-react";
 import { MAQASID, SDG_DETAILS, type Project } from "../../../data/mockData";
+import { rupiahFormatter } from "../../../utils/rupiahFormatter";
 
 import { SdgBadge } from "../../ui/Badges";
 
@@ -30,14 +31,18 @@ const getAkadDetails = (type: string, amount: number) => {
     return {
       title: "Akad Wakaf Tunai (Cash Waqf)",
       desc: "Perpetual Endowment Contract",
-      content: `I hereby declare the amount of IDR ${amount.toLocaleString()} as Cash Waqf. The principal amount shall be preserved and invested in the specified project assets (Solar Panels/Infrastructure). Only the yields/usufruct shall be utilized for the beneficiaries.`,
+      content: `I hereby declare the amount of ${rupiahFormatter(
+        amount
+      )} as Cash Waqf. The principal amount shall be preserved and invested in the specified project assets (Solar Panels/Infrastructure). Only the yields/usufruct shall be utilized for the beneficiaries.`,
       parties: "Wakif (Donor) - Nazir (Manager) - Mauquf 'Alaih (Beneficiary)",
     };
   } else if (type === "zakat") {
     return {
       title: "Akad Taukil (Agency for Zakat)",
       desc: "Direct Distribution Mandate",
-      content: `I authorize Al-Mizan as my agent (Wakil) to distribute the amount of IDR ${amount.toLocaleString()} as Zakat Maal to the eligible Asnaf (Fakir/Miskin) located in the project area for immediate consumption or operational needs.`,
+      content: `I authorize Al-Mizan as my agent (Wakil) to distribute the amount of ${rupiahFormatter(
+        amount
+      )} as Zakat Maal to the eligible Asnaf (Fakir/Miskin) located in the project area for immediate consumption or operational needs.`,
       parties: "Muzakki (Donor) - Amil (Manager) - Mustahik (Beneficiary)",
     };
   } else {
@@ -81,8 +86,8 @@ const CalculatorModal: React.FC<CalculatorModalProps> = ({
   // Economic
   // Assuming leverage ratio relative to amount
   const leverageRatio = (5000000000 / amount).toFixed(1); // Mock total project cost 5B IDR
-  const localGdp = (amount * project.metrics.multiplier).toLocaleString();
-  const taxRev = (amount * 0.15).toLocaleString(); // Mock 15%
+  const localGdp = rupiahFormatter(amount * project.metrics.multiplier);
+  const taxRev = rupiahFormatter(amount * 0.15); // Mock 15%
   const sroi = project.metrics.sroi;
 
   // Akad
@@ -107,7 +112,7 @@ const CalculatorModal: React.FC<CalculatorModalProps> = ({
             </h2>
             <div className="flex items-center space-x-3 mt-1 text-sm text-gray-500">
               <span className="flex items-center">
-                <MapPin size={14} className="mr-1" /> {project.location}
+                <MapPin size={14} className="mr-1" /> {project.location.address}
               </span>
               <span className="flex items-center text-green-600">
                 <CheckCircle size={14} className="mr-1" /> Verified Project
@@ -409,7 +414,7 @@ const CalculatorModal: React.FC<CalculatorModalProps> = ({
                             Energy Cost Savings
                           </span>
                           <span className="font-bold text-blue-800">
-                            Rp {Math.floor(2500000 * factor).toLocaleString()}
+                            {rupiahFormatter(Math.floor(2500000 * factor))}
                             /yr
                           </span>
                         </div>
@@ -508,20 +513,20 @@ const CalculatorModal: React.FC<CalculatorModalProps> = ({
                           <span className="text-gray-600">
                             Local GDP Contribution
                           </span>
-                          <span className="font-medium">Rp {localGdp}</span>
+                          <span className="font-medium">{localGdp}</span>
                         </li>
                         <li className="flex justify-between">
                           <span className="text-gray-600">
                             Tax Revenue Generated
                           </span>
-                          <span className="font-medium">Rp {taxRev}</span>
+                          <span className="font-medium">{taxRev}</span>
                         </li>
                         <li className="flex justify-between">
                           <span className="text-gray-600">
                             Import Substitution
                           </span>
                           <span className="font-medium">
-                            Rp {(amount * 0.5).toLocaleString()}
+                            {rupiahFormatter(amount * 0.5)}
                           </span>
                         </li>
                       </ul>
@@ -537,7 +542,7 @@ const CalculatorModal: React.FC<CalculatorModalProps> = ({
                             Healthcare Savings
                           </span>
                           <span className="font-medium text-green-600">
-                            Rp {(amount * 0.05).toLocaleString()}
+                            {rupiahFormatter(amount * 0.05)}
                           </span>
                         </li>
                         <li className="flex justify-between">
@@ -545,7 +550,7 @@ const CalculatorModal: React.FC<CalculatorModalProps> = ({
                             Carbon Credits Value
                           </span>
                           <span className="font-medium text-green-600">
-                            Rp {(Number(co2Total) * 150000).toLocaleString()}
+                            {rupiahFormatter(Number(co2Total) * 150000)}
                           </span>
                         </li>
                         <li className="flex justify-between">
@@ -553,7 +558,7 @@ const CalculatorModal: React.FC<CalculatorModalProps> = ({
                             Subsidy Reduction
                           </span>
                           <span className="font-medium text-green-600">
-                            Rp {(amount * 0.1).toLocaleString()}
+                            {rupiahFormatter(amount * 0.1)}
                           </span>
                         </li>
                       </ul>
@@ -724,7 +729,7 @@ const CalculatorModal: React.FC<CalculatorModalProps> = ({
                   Projected Total Impact Value
                 </span>
                 <span className="text-xl font-bold text-gray-900">
-                  Rp {(amount * sroi).toLocaleString()}
+                  {rupiahFormatter(amount * sroi)}
                 </span>
               </div>
               <div className="flex space-x-3">

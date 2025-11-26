@@ -15,18 +15,9 @@ import {
   SDG_DETAILS,
 } from "../data/mockData";
 import { MaqasidIcon, SdgBadge } from "../components/ui/Badges";
-import {
-  Search,
-  MapPin,
-  CheckCircle,
-  Filter,
-  Globe,
-  Send,
-  AlertCircle,
-  Wallet,
-  X,
-} from "lucide-react";
+import { Search, MapPin, CheckCircle, Filter, Globe } from "lucide-react";
 import { rupiahFormatter } from "../utils/rupiahFormatter";
+import CalculatorModal from "../components/dashboard/nazir/CalculatorModal";
 
 const WAKAF_CONTRACT_ADDRESS = import.meta.env
   .VITE_WAKAF_CONTRACT_ADDRESS as `0x${string}`;
@@ -55,8 +46,6 @@ const NazirDashboard = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
-  const [amount, setAmount] = useState("");
-  const [reason, setReason] = useState("");
 
   const toggleMaqasid = (id: string) => {
     setSelectedMaqasid((prev) =>
@@ -107,34 +96,25 @@ const NazirDashboard = () => {
   const handleOpenModal = (projectId: number) => {
     setSelectedProject(projectId);
     setModalOpen(true);
-    setAmount("");
-    setReason("");
   };
 
   const handleCloseModal = () => {
     setModalOpen(false);
     setSelectedProject(null);
-    setAmount("");
-    setReason("");
   };
 
-  const handleTransfer = async () => {
-    if (!selectedProject || !amount || !reason.trim()) {
-      alert("Please fill in all fields");
-      return;
-    }
-
-    if (reason.length > 30) {
-      alert("Reason must be 30 characters or less");
-      return;
-    }
+  const handleConfirmAllocation = async (
+    allocatedAmount: number,
+    allocationReason: string
+  ) => {
+    if (!selectedProject) return;
 
     if (!decimals) {
       alert("Loading token decimals...");
       return;
     }
 
-    const amountInWei = parseUnits(amount, decimals);
+    const amountInWei = parseUnits(allocatedAmount.toString(), decimals);
     const recipient = getRandomRecipient();
 
     try {
@@ -142,7 +122,7 @@ const NazirDashboard = () => {
         address: WAKAF_CONTRACT_ADDRESS,
         abi: wakafcontract,
         functionName: "moneyOut",
-        args: [IDR_CONTRACT_ADDRESS, amountInWei, recipient, reason],
+        args: [IDR_CONTRACT_ADDRESS, amountInWei, recipient, allocationReason],
       });
     } catch (err) {
       console.error("Transfer error:", err);
@@ -375,170 +355,12 @@ const NazirDashboard = () => {
 
       {/* Transfer Modal */}
       {modalOpen && selectedProjectData && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
-          <div className="bg-white rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden">
-            {/* Modal Header */}
-            <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-800">
-                  Transfer Funds
-                </h2>
-                <div className="flex items-center space-x-3 mt-1 text-sm text-gray-500">
-                  <span className="flex items-center">
-                    <MapPin size={14} className="mr-1" />{" "}
-                    {selectedProjectData.location}
-                  </span>
-                  {selectedProjectData.verified && (
-                    <span className="flex items-center text-green-600">
-                      <CheckCircle size={14} className="mr-1" /> Verified
-                      Project
-                    </span>
-                  )}
-                </div>
-              </div>
-              <button
-                onClick={handleCloseModal}
-                className="p-2 hover:bg-gray-200 rounded-full transition-colors"
-              >
-                <X size={24} className="text-gray-500" />
-              </button>
-            </div>
-
-            {/* Modal Content */}
-            <div className="p-6">
-              {/* Project Info */}
-              <div className="mb-6 p-4 bg-gray-50 rounded-lg">
-                <h3 className="font-bold text-gray-900 text-lg mb-2">
-                  {selectedProjectData.title}
-                </h3>
-                <div className="text-sm text-gray-600">
-                  <span className="font-medium">Type:</span>{" "}
-                  {selectedProjectData.type}
-                </div>
-                <div className="text-sm text-gray-600 mt-1">
-                  <span className="font-medium">Target:</span> ${" "}
-                  {selectedProjectData.quickMetrics.needed.toLocaleString()}
-                </div>
-              </div>
-
-              {/* Amount Input */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Amount (IDR)
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-bold">
-                    Rp
-                  </span>
-                  <input
-                    type="number"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    placeholder="Enter amount"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                  />
-                </div>
-                {contractBalance && decimals && (
-                  <div className="mt-2 text-sm text-gray-500">
-                    Available: {formattedBalance} IDR
-                  </div>
-                )}
-              </div>
-
-              {/* Reason Input */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Reason (Max 30 characters)
-                </label>
-                <textarea
-                  value={reason}
-                  onChange={(e) => {
-                    if (e.target.value.length <= 30) {
-                      setReason(e.target.value);
-                    }
-                  }}
-                  placeholder="Enter withdrawal reason..."
-                  maxLength={30}
-                  rows={3}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 resize-none"
-                />
-                <div className="mt-1 text-xs text-gray-500 text-right">
-                  {reason.length}/30 characters
-                </div>
-              </div>
-
-              {/* Status Messages */}
-              {error && (
-                <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start">
-                  <AlertCircle className="text-red-600 mr-2 mt-0.5" size={20} />
-                  <div>
-                    <div className="font-bold text-red-800">Error</div>
-                    <div className="text-sm text-red-600 mt-1">
-                      {error.message || "Transaction failed"}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {isSuccess && (
-                <div className="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start">
-                  <CheckCircle
-                    className="text-green-600 mr-2 mt-0.5"
-                    size={20}
-                  />
-                  <div>
-                    <div className="font-bold text-green-800">Success!</div>
-                    <div className="text-sm text-green-600 mt-1">
-                      Funds transferred successfully
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Info Box */}
-              <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                <div className="flex items-start">
-                  <AlertCircle
-                    className="text-blue-600 mr-2 mt-0.5"
-                    size={20}
-                  />
-                  <div className="text-sm text-blue-800">
-                    <div className="font-bold mb-1">Note:</div>
-                    <div>
-                      Funds will be randomly distributed to one of the
-                      authorized recipient addresses.
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Submit Button */}
-              <button
-                onClick={handleTransfer}
-                disabled={
-                  isPending ||
-                  isConfirming ||
-                  !isConnected ||
-                  !amount ||
-                  !reason.trim()
-                }
-                className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center"
-              >
-                {isPending || isConfirming ? (
-                  <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                    Processing...
-                  </>
-                ) : (
-                  <>
-                    <Send size={18} className="mr-2" />
-                    Transfer Funds
-                  </>
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
+        <CalculatorModal
+          project={selectedProjectData}
+          onClose={handleCloseModal}
+          onConfirm={handleConfirmAllocation}
+          isLoading={isPending || isConfirming}
+        />
       )}
     </div>
   );

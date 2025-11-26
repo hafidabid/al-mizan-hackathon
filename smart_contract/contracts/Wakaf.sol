@@ -13,6 +13,7 @@ contract Wakaf is Ownable {
 
     mapping(address => bool) public nazir;
     mapping(address => MoneyOut[]) public moneyOutList;
+    mapping(address => uint256) public totalMoneyOut;
 
     event NazirAdded(address nazir);
     event NazirRemoved(address nazir);
@@ -82,7 +83,15 @@ contract Wakaf is Ownable {
             })
         );
 
+        totalMoneyOut[tokenAddress] += amount;
+
         // emit event
         emit MoneyOutEvent(msg.sender, sendTo, amount, tokenAddress, reason);
+    }
+
+    function getMoneyOutCount(
+        address _tokenAddress
+    ) public view returns (uint256) {
+        return moneyOutList[_tokenAddress].length;
     }
 }

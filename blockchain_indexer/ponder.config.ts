@@ -25,7 +25,7 @@ export default createConfig({
     Wakaf: {
       chain: "liskSepolia",
       abi: wakafcontract,
-      address: "0xB95Aa3467e8ff78F2E1A901a1456C3D843287037",
+      address: "0x1066756013EF4E42c9ff464a28567f78FA679d99",
       startBlock: 29345837,
     },
   },

@@ -1,7 +1,8 @@
 import axios from "axios";
 import { type Project } from "../data/mockData";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+const API_URL =
+  import.meta.env.VITE_API_URL || "https://almizan-be.jawara.academy";
 
 export const fetchProjects = async (): Promise<Project[]> => {
   try {

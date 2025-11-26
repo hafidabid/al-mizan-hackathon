@@ -11,7 +11,7 @@ import TransactionMonitoring, {
 import ValueCreationMetrics from "../components/dashboard/wakif/ValueCreationMetrics";
 
 const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
+  import.meta.env.VITE_API_BASE_URL || "https://almizan-be.jawara.academy";
 const IDR_CONTRACT_ADDRESS = import.meta.env
   .VITE_IDR_CONTRACT_ADDRESS as `0x${string}`;
 const WAKAF_CONTRACT_ADDRESS = import.meta.env

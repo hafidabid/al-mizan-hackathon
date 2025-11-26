@@ -1,9 +1,19 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import httpx
 from pydantic import BaseModel
 from py_app_service.models import UserCreate
 
 app = FastAPI()
+
+# Add CORS middleware to allow all origins and methods
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 POCKETBASE_BASE_URL = "https://hackathon22.pocketbase.bocindonesia.com"
 POCKETBASE_USERS_COLLECTION = "users"

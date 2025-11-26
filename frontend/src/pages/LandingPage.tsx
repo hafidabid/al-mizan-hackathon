@@ -139,14 +139,14 @@ const LandingPage = () => {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            {/* <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 to="/projects"
                 className="px-8 py-4 bg-white text-green-800 rounded-full font-bold text-lg hover:bg-gray-100 transition-colors shadow-lg flex items-center justify-center"
               >
                 Explore Projects <ArrowRight className="ml-2" size={20} />
               </Link>
-            </div>
+            </div> */}
           </div>
 
           {/* Quick Donate Widget */}

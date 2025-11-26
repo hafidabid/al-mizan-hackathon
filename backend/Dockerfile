@@ -27,7 +27,7 @@ COPY . /app
 # RUN rm /app/py_app_service/config.py
 COPY py_app_service/config.docker.py /app/py_app_service/config.py
 
-RUN pip install ultralytics
+# RUN pip install ultralytics
 
 # Expose the application port
 EXPOSE 8000

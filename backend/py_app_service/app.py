@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 import asyncio
 from py_app_service.routers import projects, indexer, users, selected_projects, training
-from py_app_service.services.training import process_training_job
+# from py_app_service.services.training import process_training_job
 
 
 app = FastAPI()

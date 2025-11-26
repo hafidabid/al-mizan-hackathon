@@ -1,7 +1,10 @@
 #----------------------------------------------------------------#
 # Stage 1: Builder Stage - Compiles the React application        #
 #----------------------------------------------------------------#
-FROM node:20-buster AS builder
+FROM node:20-alpine AS builder
+
+# Install pnpm globally
+RUN npm install -g pnpm
 
 # Use a non-root user for security
 USER node
@@ -9,18 +12,18 @@ USER node
 WORKDIR /home/node/app
 
 # Copy only package files first to leverage Docker cache
-COPY --chown=node:node package*.json ./
+COPY --chown=node:node package.json pnpm-lock.yaml ./
 
-# Install all dependencies needed for the build
-RUN npm install
+# Install all dependencies needed for the build.
+# We use --frozen-lockfile to ensure the lock file is respected.
+RUN pnpm install --frozen-lockfile
 
 # Copy the rest of the source code
 COPY --chown=node:node . .
 
 # Run the build command
-# Using CI=true ensures tests don't run in watch mode if you have them
 ENV CI=true
-RUN npm run build
+RUN pnpm run build
 
 #----------------------------------------------------------------#
 # Stage 2: Production Stage - Serves the built static files      #
@@ -44,17 +47,20 @@ CMD ["nginx", "-g", "daemon off;"]
 #----------------------------------------------------------------#
 # Stage 3: Development Stage - For local development with HMR    #
 #----------------------------------------------------------------#
-FROM node:20-buster AS development
+FROM node:20-alpine AS development
+
+# Install pnpm globally
+RUN npm install -g pnpm
 
 USER node
 
 WORKDIR /home/node/app
 
 # Copy package files
-COPY --chown=node:node package*.json ./
+COPY --chown=node:node package.json pnpm-lock.yaml ./
 
 # Install all dependencies
-RUN npm install
+RUN pnpm install
 
 # Copy source code (will be overwritten by volume mount in compose)
 COPY --chown=node:node . .
@@ -62,4 +68,4 @@ COPY --chown=node:node . .
 EXPOSE 5173
 
 # Start development server and bind it to all network interfaces
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+CMD ["pnpm", "run", "dev", "--", "--host", "0.0.0.0"]

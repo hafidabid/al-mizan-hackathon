@@ -1,7 +1,7 @@
 from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel
 from typing import List
-from py_app_service.services.training import process_training_job
+# from py_app_service.services.training import process_training_job
 
 # router = APIRouter(prefix="/training", tags=["training"])
 

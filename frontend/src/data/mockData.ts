@@ -123,8 +123,8 @@ export const liveImpactData = [
 ];
 
 export const allocationSplit = [
-  { name: "Waqf (Endowment)", value: 60, color: "#10B981" }, // Green-500
-  { name: "Zakat (Direct)", value: 40, color: "#F59E0B" }, // Amber-500
+  // { name: "Waqf (Endowment)", value: 60, color: "#10B981" }, // Green-500
+  // { name: "Zakat (Direct)", value: 40, color: "#F59E0B" }, // Amber-500
 ];
 
 // Live Updates Data

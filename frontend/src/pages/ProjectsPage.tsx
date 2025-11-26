@@ -70,7 +70,7 @@ const ProjectsPage = () => {
               Verified Waqf Projects
             </h1>
             <p className="text-gray-500 mt-2">
-              Invest in high-impact, Sharia-compliant projects vetted by AI.
+              Invest in the sustainable sharia-based projects
             </p>
           </div>
           <div className="flex space-x-3 w-full md:w-auto">
@@ -209,7 +209,7 @@ const ProjectsPage = () => {
                               Target
                             </div>
                             <div className="font-bold text-gray-900 text-lg">
-                              $ {project.quickMetrics.needed.toLocaleString()}
+                              Rp {project.quickMetrics.needed.toLocaleString()}
                             </div>
                           </div>
                           <div>

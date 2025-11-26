@@ -170,7 +170,7 @@ const NazirDashboard = () => {
         <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">
-              Nazir Dashboard
+              Green Tick Project
             </h1>
             <p className="text-gray-500 mt-2">
               Manage and distribute funds from the Wakaf contract
@@ -183,7 +183,7 @@ const NazirDashboard = () => {
                 Contract Balance
               </div>
               <div className="text-lg font-bold text-gray-900">
-                {formattedBalance} IDR
+                {formattedBalance}
               </div>
             </div>
             <div className="relative flex-1 md:flex-none">

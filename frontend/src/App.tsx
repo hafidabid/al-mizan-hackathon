@@ -28,7 +28,7 @@ function App() {
                 Al-Mizan+
               </span>
               <p className="text-gray-400 text-sm mt-1">
-                Trust. Transparency. Impact.
+                Green Investment. Sharia Compliance. Scalable Impact.
               </p>
             </div>
             <div className="text-gray-500 text-sm">

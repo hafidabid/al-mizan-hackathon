@@ -120,18 +120,19 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center">
           <div className="max-w-3xl md:w-1/2">
             <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
-              Trusted Islamic Charity <br />
+              Rooted by Islamic Value <br />
               <span className="text-green-300">Powered by AI & Blockchain</span>
             </h1>
             <p className="text-xl md:text-2xl text-green-50 mb-10 font-light">
-              Al-Mizan+ ensures your Waqf and Zakat create real, verified impact
-              compliant with Maqasid Sharia and SDGs.
+              Al Mizan+ transforms idle Islamic assets into productive and
+              bankable infrastructure projects with the sustainable sharia-based
+              principles
             </p>
 
             {/* Total Donation Stat */}
             <div className="mb-8 p-4 bg-white/10 rounded-xl backdrop-blur-sm inline-block">
               <div className="text-sm text-green-200 uppercase tracking-wider font-bold mb-1">
-                Total Wakaf Value
+                Accumulated Funds
               </div>
               <div className="text-3xl font-mono font-bold text-white">
                 {rupiahFormatter(totalDonation)}
@@ -152,7 +153,7 @@ const LandingPage = () => {
           <div className="mt-12 md:mt-0 md:w-1/2 md:pl-12 w-full">
             <div className="bg-white p-8 rounded-2xl shadow-2xl border border-green-100">
               <h3 className="text-xl font-bold mb-4 flex items-center text-green-700">
-                <Coins className="mr-2 text-green-600" /> Quick Waqf Donation
+                <Coins className="mr-2 text-green-600" /> Start Your Impact
               </h3>
 
               {!isConnected ? (
@@ -195,7 +196,7 @@ const LandingPage = () => {
                     disabled={isPending || isConfirming || !amount}
                     className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white font-bold py-4 rounded-xl shadow-lg transition-transform transform active:scale-95 flex items-center justify-center"
                   >
-                    {isPending || isConfirming ? "Processing..." : "Wakaf Now"}
+                    {isPending || isConfirming ? "Processing..." : "Waqf Now"}
                   </button>
 
                   {hash && (
@@ -205,7 +206,7 @@ const LandingPage = () => {
                   )}
                   {isConfirmed && (
                     <div className="text-sm text-green-800 font-bold text-center bg-green-100 p-3 rounded shadow-sm border border-green-200">
-                      Donation Successful! Jazakumullah Khair.
+                      Successful! Jazakumullah Khair.
                     </div>
                   )}
                   {writeError && (
@@ -226,8 +227,9 @@ const LandingPage = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900">Why Al-Mizan+?</h2>
             <p className="text-gray-500 mt-4 max-w-2xl mx-auto">
-              We combine traditional Islamic finance values with cutting-edge
-              technology to ensure trust, transparency, and impact.
+              We are bridging classic Islamic finance values with the
+              state-of-art technology to ensure trust, transparency, and
+              compliance.
             </p>
           </div>
 
@@ -238,7 +240,7 @@ const LandingPage = () => {
                 <Leaf size={28} />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">
-                Green & Sharia Compliant
+                A Sustainable Sharia-based Principles
               </h3>
               <p className="text-gray-600 leading-relaxed">
                 All projects are vetted for alignment with Maqasid Sharia (Hifz

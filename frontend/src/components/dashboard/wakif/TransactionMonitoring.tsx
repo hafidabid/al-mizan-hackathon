@@ -106,10 +106,10 @@ const TransactionMonitoring: React.FC<TransactionMonitoringProps> = ({
                         {formatTimestamp(event.blockTimestamp)}
                       </div>
                       <div className="font-bold text-gray-900 text-sm mb-1">
+                        Rp{" "}
                         {rupiahFormatter(
                           Number(formatUnits(BigInt(event.amount), 6))
                         )}{" "}
-                        IDR
                       </div>
                       <div className="text-xs text-gray-600 mb-2">
                         {event.reason}
@@ -159,11 +159,10 @@ const TransactionMonitoring: React.FC<TransactionMonitoringProps> = ({
                         {formatTimestamp(transfer.blockTimestamp)}
                       </div>
                       <div className="font-bold text-green-600 text-sm mb-1">
-                        +
+                        + Rp{" "}
                         {rupiahFormatter(
                           Number(formatUnits(BigInt(transfer.value), 6))
                         )}
-                        IDR
                       </div>
                     </div>
                   </div>

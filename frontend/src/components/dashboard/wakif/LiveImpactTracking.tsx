@@ -124,7 +124,7 @@ const LiveImpactTracking = () => {
             <div className="text-xs text-gray-500">Status</div>
           </div>
           <div>
-            <div className="text-lg font-bold">$ 22.5k</div>
+            <div className="text-lg font-bold">Rp 62.500.000</div>
             <div className="text-xs text-gray-500">Credit Value</div>
           </div>
         </div>

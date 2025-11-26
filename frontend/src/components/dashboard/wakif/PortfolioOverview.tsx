@@ -21,32 +21,11 @@ const PortfolioOverview = () => {
         </h3>
         <div className="flex items-end space-x-3 mb-6">
           <span className="text-4xl font-extrabold text-gray-900">
-            $ 450,000
+            Rp 123.000.000 / yr
           </span>
           <span className="text-green-600 text-sm font-bold bg-green-50 px-2 py-1 rounded mb-1">
             ↑ 12%
           </span>
-        </div>
-        <div className="h-32">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart layout="vertical" data={allocationSplit} barSize={20}>
-              <XAxis type="number" hide />
-              <YAxis
-                dataKey="name"
-                type="category"
-                width={100}
-                tick={{ fontSize: 11 }}
-                axisLine={false}
-                tickLine={false}
-              />
-              <RechartsTooltip cursor={{ fill: "transparent" }} />
-              <Bar dataKey="value" radius={[0, 4, 4, 0]}>
-                {allocationSplit.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
         </div>
       </div>
 

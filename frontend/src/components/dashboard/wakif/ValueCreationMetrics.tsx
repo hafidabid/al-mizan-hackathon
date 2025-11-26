@@ -21,7 +21,7 @@ const ValueCreationMetrics = () => {
                 <DollarSign size={14} className="mr-2" /> Revenue Generated
               </span>
               <span className="font-mono font-bold text-gray-900">
-                $ 125,000
+                Rp 125.000.000 / yr
               </span>
             </li>
             <li className="flex justify-between items-center">
@@ -29,7 +29,7 @@ const ValueCreationMetrics = () => {
                 <Briefcase size={14} className="mr-2" /> Wages Paid (Local)
               </span>
               <span className="font-mono font-bold text-gray-900">
-                $ 42,000
+                Rp 42.000.000 / yr
               </span>
             </li>
             <li className="flex justify-between items-center">
@@ -37,7 +37,7 @@ const ValueCreationMetrics = () => {
                 Local Procurement
               </span>
               <span className="font-mono font-bold text-gray-900">
-                $ 85,500
+                Rp 50.000.000 / yr
               </span>
             </li>
           </ul>
@@ -60,7 +60,7 @@ const ValueCreationMetrics = () => {
                 <Heart size={14} className="mr-2" /> Healthcare Savings
               </span>
               <span className="font-mono font-bold text-green-600">
-                $ 12,000 / yr
+                Rp 50.000.000 / yr
               </span>
             </li>
             <li className="flex justify-between items-center">

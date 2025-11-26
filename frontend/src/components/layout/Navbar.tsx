@@ -62,7 +62,7 @@ export const Navbar = () => {
             location.pathname === "/wakif" ? "text-green-700" : "text-gray-500"
           }`}
         >
-          Dashboard
+          Impact Dashboard
         </Link>
         {isNazir && (
           <Link
@@ -73,7 +73,7 @@ export const Navbar = () => {
                 : "text-gray-500"
             }`}
           >
-            Nazir Dashboard
+            Green Tick Project
           </Link>
         )}
       </nav>
@@ -81,7 +81,7 @@ export const Navbar = () => {
       {/* User Actions */}
       <div className="flex items-center space-x-4">
         {isConnected && (
-          <div className="flex flex-col items-end mr-2">
+          <div className="flex flex-col items-end mr-4">
             <span className="text-[10px] text-gray-400 uppercase font-bold tracking-wider">
               Your Balance
             </span>
@@ -89,7 +89,6 @@ export const Navbar = () => {
               {rupiahFormatter(
                 Number(formatUnits(balance ?? BigInt(0), decimals ?? 0))
               )}{" "}
-              IDR
             </span>
           </div>
         )}

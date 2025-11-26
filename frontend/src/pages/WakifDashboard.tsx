@@ -110,11 +110,9 @@ const WakifDashboard = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">
-            Wakaf Management Reporting
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-900">Impact Dashboard</h1>
           <p className="text-gray-500">
-            Impact Monitoring & Value Creation Monitoring
+            Impact Measurement, Reporting, and Verification (MRV) Monitor
           </p>
         </div>
         <div className="flex items-center space-x-4"></div>
